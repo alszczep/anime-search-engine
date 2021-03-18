@@ -1,5 +1,46 @@
+@import 'mixins';
+$cardHeight: 500px;
+$cardWidth: 300px;
+$titleHeight: 60px;
+
 .results{
+    @include flex-box(row, center, center);
+    flex-wrap: wrap;
     h1{
-        color: red;
+        width: 100%;
+    }
+    .singleResult{
+        @include flex-box(column, flex-start, center);
+        height: $cardHeight;
+        width: $cardWidth;
+        margin: 20px;
+        border: 2px solid black;
+        border-radius: 5px;
+        overflow: hidden;
+        .link{
+            text-decoration: none;
+            color: black;
+            img{
+                height: $cardHeight - $titleHeight;
+                width: 100%;
+                object-fit: cover;
+            }
+            h2{
+                text-align: center;
+                width: $cardWidth;
+                height: $titleHeight;
+                margin: 0px;
+                line-height: $titleHeight;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+    .singleResult:hover{
+        background-color: #c8c8fc;
+        img{
+            filter: blur(2px);
+        }
     }
 }

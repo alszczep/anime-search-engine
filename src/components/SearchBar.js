@@ -1,21 +1,21 @@
 import { useRef, useState } from "react";
 
-const SearchBar = () => {
-    const [query, setQuery] = useState('');
+const SearchBar = ({ setUrl, query, setQuery, setCurrentQuery }) => {
     const searchBarElement = useRef(null);
     const onQueryChange = () => {
         setQuery(searchBarElement.current.value);
     };
     const submitSearch = (e) => {
         e.preventDefault();
-        console.log(query);
+        setUrl(`https://api.jikan.moe/v3/search/anime?q=${query}`);
+        setCurrentQuery(query);
     };
-    return (<div className='searchBar'>
+    return (<section className='searchBar'>
         <form>
             <input type='text' value={query} ref={searchBarElement} onChange={onQueryChange}/>
-            <input type='submit' onClick={submitSearch}/>
+            <input type='submit' value='search' onClick={submitSearch}/>
         </form>
-    </div>);
+    </section>);
 };
 
 export default SearchBar;

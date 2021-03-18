@@ -1,7 +1,14 @@
-const Results = ({ data }) => {
-    return (<div className='results'>
-        <h1>results for: query</h1>
-    </div>);
+import { useEffect } from "react";
+import SingleResult from "./results/SingleResult";
+
+const Results = ({ data, currentQuery }) => {
+    console.log(data);
+    return (<section className='results'>
+        <h1>results for: {currentQuery}</h1>
+        {data? data.results.map((item) => {
+            return <SingleResult key={item.mal_id} data={item}/>
+        }): 'LOADING'}
+    </section>);
 };
 
 export default Results;

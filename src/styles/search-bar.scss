@@ -1,0 +1,8 @@
+@import 'mixins';
+@import 'variables';
+
+.searchBar{
+    padding: 75px;
+    background-color: $searchBarColor;
+    @include flex-box(row, center, center);
+}
