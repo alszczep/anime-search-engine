@@ -1,8 +1,36 @@
 @import 'mixins';
 @import 'variables';
 
+$searchBarHeight: 35px;
+
 .searchBar{
     padding: 75px;
     background-color: $searchBarColor;
     @include flex-box(row, center, center);
+    form{
+        @include flex-box(row, center, center);
+        @include clear-padding-margin;
+        background-color: white;
+        border-radius: 9999px;
+        height: $searchBarHeight;
+        input[type=image]{
+            padding: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-left: 1px solid rgb(158, 158, 158);
+            height: 60%;
+        }
+        input[type=text]{
+            padding: 5px;
+            padding-left: 10px;
+            font-size: 130%;
+            height: 100%;
+            border-radius: 9999px;
+            box-sizing: border-box;
+            border: 0px;
+        }
+        input:focus{
+            outline: none;
+        }
+    }
 }

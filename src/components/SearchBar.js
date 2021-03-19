@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import searchIcon from './../search_icon.svg'
 
 const SearchBar = ({ setUrl, query, setQuery, setCurrentQuery }) => {
     const searchBarElement = useRef(null);
@@ -13,7 +14,7 @@ const SearchBar = ({ setUrl, query, setQuery, setCurrentQuery }) => {
     return (<section className='searchBar'>
         <form>
             <input type='text' value={query} ref={searchBarElement} onChange={onQueryChange}/>
-            <input type='submit' value='search' onClick={submitSearch}/>
+            <input type='image' src={searchIcon} alt='search' onClick={submitSearch}/>
         </form>
     </section>);
 };

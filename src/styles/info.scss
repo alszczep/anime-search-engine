@@ -3,10 +3,49 @@ $bgColor: rgb(234, 250, 255);
 
 .info{
     margin: 10px;
-    margin-top: 50px;
+    margin-top: $headerHeight + 10px;
     padding: 10px;
     border-radius: 10px;
     background-color: $bgColor;
+    @include flex-box(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    article{
+        width: 72%;
+        box-sizing: border-box;
+        margin: 2%;
+        section{
+            box-sizing: border-box;
+            margin-bottom: 2%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+            h3{
+                @include flex-box(row, flex-start, center);
+                img.arrowIcon{
+                    height: 10px;
+                    width: 10px;
+                }
+                img.fliped{
+                    transform: scaleY(-1);
+                }
+            }
+            .episodesHeader{
+                @include flex-box(row, flex-end, center);
+                margin: 0px;
+                padding: 0px;
+                h3{
+                    margin-right: auto;
+                }
+                select{
+                    display: none;
+                }
+            }
+        }
+        ul{
+            display: none;
+            list-style-type: none;
+        }
+    }
     .titleBox{
         @include flex-box(column, flex-start, center);
         margin: 2%;
@@ -26,6 +65,13 @@ $bgColor: rgb(234, 250, 255);
             margin: 0px;
             padding: 5px;
             border-bottom: 1px solid black;
+        }
+        .tags{
+            @include flex-box(column, flex-start, flex-start);
+            p{
+                align-self: center;
+                margin: 0px;
+            }
         }
         h4:last-of-type{
             border-bottom: 0px;

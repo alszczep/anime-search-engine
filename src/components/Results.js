@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import SingleResult from "./results/SingleResult";
 
 const Results = ({ data, currentQuery }) => {
-    console.log(data);
     return (<section className='results'>
         <h1>results for: {currentQuery}</h1>
         {data? data.results.map((item) => {
