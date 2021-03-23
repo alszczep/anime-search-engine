@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import searchIcon from './../search_icon.svg'
 
 const SearchBar = ({ setUrl, query, setQuery, setCurrentQuery }) => {
@@ -8,8 +8,12 @@ const SearchBar = ({ setUrl, query, setQuery, setCurrentQuery }) => {
     };
     const submitSearch = (e) => {
         e.preventDefault();
-        setUrl(`https://api.jikan.moe/v3/search/anime?q=${query}`);
-        setCurrentQuery(query);
+        if(query.length >= 3){
+            setUrl(`https://api.jikan.moe/v3/search/anime?q=${query}`);
+            setCurrentQuery(query);
+        }else{
+            alert('query has to be at least 3 characters long');
+        }
     };
     return (<section className='searchBar'>
         <form>

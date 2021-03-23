@@ -1,5 +1,6 @@
 @import 'mixins';
-$bgColor: rgb(234, 250, 255);
+@import 'variables';
+
 
 .info{
     margin: 10px;
@@ -19,6 +20,11 @@ $bgColor: rgb(234, 250, 255);
             padding: 10px;
             border-radius: 5px;
             background-color: white;
+            ul{
+                li{
+                    margin: 15px;
+                }
+            }
             h3{
                 @include flex-box(row, flex-start, center);
                 img.arrowIcon{
@@ -41,6 +47,22 @@ $bgColor: rgb(234, 250, 255);
                 }
             }
         }
+        section.ranks{
+            @include flex-box(row, center, center);
+            section{
+                @include flex-box(column, center, center);
+                box-sizing: border-box;
+                width: 50%;
+                height: 100%;
+                margin: 0px;
+                p{
+                    @include clear-padding-margin;
+                }
+                p.scoreNumber{
+                    font-size: 300%;
+                }
+            }
+        }
         ul{
             display: none;
             list-style-type: none;
@@ -60,11 +82,15 @@ $bgColor: rgb(234, 250, 255);
             width: 100%;
         }
         h4{
-            box-sizing: border-box;
-            width: 100%;
+            width: 90%;
             margin: 0px;
+            margin-left: 5px;
+            margin-right: 5px;
             padding: 5px;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid darken($bgColor, 7%);
+        }
+        .myanimelist{
+            text-align: center;
         }
         .tags{
             @include flex-box(column, flex-start, flex-start);
@@ -75,6 +101,28 @@ $bgColor: rgb(234, 250, 255);
         }
         h4:last-of-type{
             border-bottom: 0px;
+        }
+    }
+}
+
+@media screen{
+    @media (max-width: 1200px) and (orientation: portrait), (max-width: 800px) and (orientation: landscape){
+            .info{
+            margin: 2%;
+            margin-top: $headerHeight + 10px;
+            padding: 2%;
+            width: 96%;
+            box-sizing: border-box;
+            @include flex-box(column, flex-start, center);
+            flex-wrap: wrap;
+            aside.titleBox{
+                box-sizing: border-box;
+                width: 95%;
+            }
+            article{
+                box-sizing: border-box;
+                width: 95%;
+            }
         }
     }
 }

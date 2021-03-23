@@ -5,7 +5,7 @@ import arrowIcon from "./../arrow_icon.svg";
 
 const Info = () => {
     const { mal_id } = useParams();
-    const [url, setUrl] = useState(`https://api.jikan.moe/v3/anime/${mal_id}`);
+    const [url] = useState(`https://api.jikan.moe/v3/anime/${mal_id}`);
     const [data, setData] = useState();
     const [episodesPage, setEpisodesPage] = useState(1);
     const [episodesUrl, setEpisodesUrl] = useState(`https://api.jikan.moe/v3/anime/${mal_id}/episodes/${episodesPage}`);
@@ -67,8 +67,20 @@ const Info = () => {
                        return (<p key={item.mal_id}>{item.name}</p>);
                     })}
                 </h4>
+                <h4 className='myanimelist'><a href={data.url}>MyAnimeList</a></h4>
             </aside>
             <article>
+                <section className='ranks'>
+                    <section className='score'>
+                        <p className='scoreNumber'>{data.score}</p>
+                        <p className='scoreDesc'>score</p>
+                    </section>
+                    <section className='rank'>
+                        <p className='scoreNumber'>#{data.rank}</p>
+                        <p className='scoreDesc'>rank</p>
+                    </section>
+                    
+                </section>
                 <section>
                     <h3>Description</h3>
                     <p>{data.synopsis}</p>

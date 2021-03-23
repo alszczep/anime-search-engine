@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import SingleResult from "./results/SingleResult";
 
 const Results = ({ data, currentQuery }) => {

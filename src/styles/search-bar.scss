@@ -34,3 +34,16 @@ $searchBarHeight: 35px;
         }
     }
 }
+@media only screen and (max-width: 350px) {
+    .searchBar{
+        form{
+            width: 250px;
+            input[type=text]{
+                width: 180px;
+            }
+            input[type=image]{
+                width: 20px;
+            }
+        }
+    }
+}
