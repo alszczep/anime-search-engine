@@ -2,11 +2,18 @@
 
 Anime search engine created with react using [jikan.moe API](https://jikan.moe/).
 
-## Live Demo
+## [Live Demo](https://alszczep-anime-search-engine.netlify.app/)
 
-[Netlify](https://alszczep-anime-search-engine.netlify.app/)
+## How to use
 
-## Available Scripts
+To run it locally you will need node installed on your machine(tested using v14.15.0). After you clone/download a repository, navigate to its directory and install needed modules:
 
-### `npm start`
-### `npm run build`
+##### `npm install`
+
+After the installation process you can run an app in development mode using:
+
+##### `npm start`
+
+To build use following command:
+
+##### `npm run build`
