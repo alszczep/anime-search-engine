@@ -1,6 +1,5 @@
-# Anime Search Engine
-
-Anime search engine created with react using [jikan.moe API](https://jikan.moe/).
+# Anime List
+ [jikan.moe API](https://jikan.moe/).
 
 ## [Live Demo](https://alszczep-anime-search-engine.netlify.app/)
 

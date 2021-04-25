@@ -1,0 +1,25 @@
+@import './../variables.scss';
+@import './../mixins.scss';
+
+.navigation{
+    @include flex-box(row, flex-start, center);
+    height: $headerHeight;
+    box-shadow: $searchBarColor 0px 3px 4px;
+    top: 0px;
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    background-color: $headerColor;
+    &__link{
+        width: 100%;
+        text-decoration: none;
+    }
+    &__header{
+        margin: 0px;
+        padding: 10px;
+        color: white;
+    }
+}
+.navigation:hover{
+    background-color: darken($headerColor, 2%);
+}

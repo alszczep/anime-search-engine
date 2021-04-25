@@ -1,0 +1,13 @@
+.info__ranks{
+    @include flex-box(row, center, center);
+    .info__score, .info__rank{
+        @include flex-box(column, center, center);
+        box-sizing: border-box;
+        width: 50%;
+        height: 100%;
+        margin: 0px;   
+    }
+    .info__score-number{
+        font-size: 300%;
+    }
+}

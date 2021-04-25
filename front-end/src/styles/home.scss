@@ -1,0 +1,13 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+@import './home/result-card.scss';
+@import './home/search-bar.scss';
+
+.home{
+    @include flex-box(row, center, center);
+    flex-wrap: wrap;
+    &__query{
+        width: 100%;
+        margin-left: 10px;
+    }
+}

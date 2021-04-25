@@ -1,0 +1,49 @@
+@import './../mixins.scss';
+@import './../variables.scss';
+
+$searchBarHeight: 35px;
+
+.search-bar{
+    @include flex-box(row, center, center);
+    width: 100%;
+    padding: 75px;
+    background-color: $searchBarColor;
+    &__form{
+        @include flex-box(row, center, center);
+        background-color: white;
+        border-radius: 9999px;
+        height: $searchBarHeight;
+    }
+    &__input--text{
+        padding: 5px;
+        padding-left: 10px;
+        font-size: 130%;
+        height: 100%;
+        border-radius: 9999px;
+        box-sizing: border-box;
+        border: 0px;
+    }
+    &__input--submit{
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-left: 1px solid rgb(158, 158, 158);
+        height: 60%;
+    }
+    &__input:focus{
+        outline: none;
+    }
+}
+@media only screen and (max-width: 350px) {
+    .search-bar{
+        &__form{
+        width: 250px;
+        }
+        &__input--text{
+            width: 180px;
+        }
+        &__input--submit{
+            width: 20px;
+        }
+    }
+}

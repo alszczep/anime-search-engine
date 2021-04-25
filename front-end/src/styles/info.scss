@@ -1,0 +1,43 @@
+@import './info/drop-down-list.scss';
+@import './info/ranks.scss';
+@import './info/title-box.scss';
+@import './mixins.scss';
+@import './variables.scss';
+
+
+.info{
+    @include flex-box(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    margin: 10px;
+    margin-top: $headerHeight + 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: $bgColor;
+    &__main-box{
+        width: 72%;
+        box-sizing: border-box;
+        margin: 2%;
+    }
+}
+.info__description, .info__ranks, .drop-down-list{
+    margin-bottom: 2%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+@media screen{
+    @media (max-width: 1200px) and (orientation: portrait), (max-width: 800px) and (orientation: landscape){
+        .info{
+            @include flex-box(column, flex-start, center);
+            flex-wrap: wrap;
+            margin: 2%;
+            margin-top: $headerHeight + 10px;
+            padding: 2%;
+            width: 96%;
+            &__title-box, &__main-box{
+                width: 95%;
+            }
+        }  
+    }
+}

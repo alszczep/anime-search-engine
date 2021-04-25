@@ -1,0 +1,35 @@
+.result-card{
+    @include flex-box(column, flex-start, center);
+    height: $cardHeight;
+    width: $cardWidth;
+    margin: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: black 0px 0px 5px;
+    &__link{
+        text-decoration: none;
+        color: black;
+    }
+    &__image{
+        height: $cardHeight - $titleHeight;
+        width: 100%;
+        object-fit: cover;
+    }
+    &__header{
+        text-align: center;
+        width: $cardWidth;
+        height: $titleHeight;
+        margin: 0px;
+        line-height: $titleHeight;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+.result-card:hover{
+    background-color: #c8c8fc;
+    .result-card__image{
+        filter: blur(2px);
+    }
+}

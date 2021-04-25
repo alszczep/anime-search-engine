@@ -1,0 +1,25 @@
+.drop-down-list{
+    &__list-item{
+        margin: 15px;
+    }
+    &__header{
+        @include flex-box(row, flex-start, center);
+        width: fit-content;
+    }
+    &__button{
+        height: 10px;
+        width: 10px;
+        margin-right: 3px;
+    }
+    &__button--fliped{
+        transform: scaleY(-1);
+    }
+    &__episodes-page-select{
+        display: none;
+        margin-left: auto;
+    }
+    &__list{
+        display: none;
+        list-style-type: none;
+    }
+}
