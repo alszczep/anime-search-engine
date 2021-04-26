@@ -11,15 +11,31 @@
     width: 100%;
     background-color: $headerColor;
     &__link{
-        width: 100%;
+        height: $headerHeight;
+    }
+    &__link--home{
         text-decoration: none;
     }
     &__header{
+        @include flex-box(row, center, center);
         margin: 0px;
-        padding: 10px;
+        padding: 10px 20px;
         color: white;
+        height: 100%;
     }
-}
-.navigation:hover{
-    background-color: darken($headerColor, 2%);
+    &__link--home:hover{
+        background-color: darken($headerColor, 2%);
+    }
+    &__link--user{
+        @include flex-box(row, center, center);
+        width: $headerHeight;
+        margin-left: auto;
+    }
+    &__user-icon{
+        height: 50%;
+        width: 50%;
+    }
+    &__link--user:hover{
+        background-color: darken($headerColor, 2%);
+    }
 }

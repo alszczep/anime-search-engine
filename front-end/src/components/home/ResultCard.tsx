@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FC } from 'react';
 
-const ResultCard: FC<any> = ({ data }) => {
+const ResultCard: FC<any> = ({ data }): JSX.Element => {
     return (
         <section 
             className='result-card'>

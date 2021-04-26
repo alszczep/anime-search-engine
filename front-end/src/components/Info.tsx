@@ -8,80 +8,76 @@ import TitleBox from "./info/TitleBox";
 import Description from "./info/Description";
 import Ranks from "./info/Ranks";
 import { fetchData } from "../modules/fetch-data";
-import { toggleElement } from "../modules/info/toggle-element";
 import { changeEpisodesPage } from "../modules/info/change-episodes-page";
+import { createContext } from "react";
 
-const Info: FC<any> = () => {
+export const InfoContext: any = createContext({});
+
+const Info: FC<any> = (): JSX.Element => {
     const { mal_id } = useParams<any>();
     const [url] = useState<string>(`https://api.jikan.moe/v3/anime/${mal_id}`);
     const [data, setData] = useState<any>();
     const [episodesPage, setEpisodesPage] = useState<number>(1);
-    const [episodesUrl, setEpisodesUrl] = useState<string>(`https://api.jikan.moe/v3/anime/${mal_id}/episodes/${episodesPage}`);
     const [episodes, setEpisodes] = useState<any>([]);
-    const openingsRef = useRef<HTMLUListElement>(null);
-    const endingsRef = useRef<HTMLUListElement>(null);
-    const episodesRef = useRef<HTMLUListElement>(null);
-    const openingsImageRef = useRef<HTMLHeadingElement>(null);
-    const endingsImageRef = useRef<HTMLHeadingElement>(null);
-    const episodesImageRef = useRef<HTMLHeadingElement>(null);
-    const episodesPageRef = useRef<HTMLSelectElement>(null);
+    const refs = {
+        openings: {
+            ref: useRef<HTMLUListElement>(null),
+            imageRef: useRef<HTMLHeadingElement>(null)
+        },
+        endings: {
+            ref: useRef<HTMLUListElement>(null),
+            imageRef: useRef<HTMLHeadingElement>(null)
+        },
+        episodes: {
+            ref: useRef<HTMLUListElement>(null),
+            imageRef: useRef<HTMLHeadingElement>(null),
+            pageRef: useRef<HTMLSelectElement>(null)
+        },
+    }
+
     const getData = useCallback(async() => {
         setData(await fetchData(url, 'GET'));
     }, [url]);
     useEffect(() => {
         getData();
     }, [url, getData]);
-    useEffect(() => {
-        setEpisodesUrl(`https://api.jikan.moe/v3/anime/${mal_id}/episodes/${episodesPage}`);
-    }, [episodesPage, mal_id])
     const getEpisodes = useCallback(async() => {
-        setEpisodes(await fetchData(episodesUrl, 'GET'));
-    }, [episodesUrl]);
+        setEpisodes(await fetchData(`https://api.jikan.moe/v3/anime/${mal_id}/episodes/${episodesPage}`, 'GET'));
+    }, [episodesPage, mal_id]);
     useEffect(() => {
         getEpisodes();
-    }, [episodesUrl, getEpisodes]);
+    }, [episodesPage, getEpisodes]);
     if(data && data.title && episodes && episodes.episodes)  
         return (
-            <section 
-                className='info'>
-                <TitleBox 
-                    data={data}/>
-                <article
-                    className='info__main-box'>
-                    <Description synopsis={data.synopsis}/>
-                    <Ranks
-                        score={data.score}
-                        rank={data.rank}/>
-                    <DropDownList 
-                        headerText={'Openings'}
-                        data={data.opening_themes}
-                        toggleElement={toggleElement}
-                        elementRef={openingsRef}
-                        imageRef={openingsImageRef}
-                        episodesPageRef={episodesPageRef}/>
-                    <DropDownList 
-                        headerText={'Endings'}
-                        data={data.ending_themes}
-                        toggleElement={toggleElement}
-                        elementRef={endingsRef}
-                        imageRef={endingsImageRef}
-                        episodesPageRef={episodesPageRef}/>
-                    <DropDownList 
-                        headerText={'Episodes'}
-                        data={episodes.episodes}
-                        toggleElement={toggleElement}
-                        elementRef={episodesRef}
-                        imageRef={episodesImageRef}
-                        episodesPageRef={episodesPageRef}
-                        children={
-                            <EpisodesDropDownList 
-                                episodesPage={episodesPage}
-                                episodesPageRef={episodesPageRef}
-                                changeEpisodesPage={() => {changeEpisodesPage(mal_id, setEpisodesPage, episodesPageRef)}}
-                                episodes={episodes}/>
-                        }/>
-                </article>
-            </section>
+            <InfoContext.Provider value={{infoState: {}, infoDispatch: {}, refs}}>
+                <section 
+                    className='info main'>
+                    <TitleBox 
+                        data={data}/>
+                    <article
+                        className='info__main-box'>
+                        <Description synopsis={data.synopsis}/>
+                        <Ranks
+                            score={data.score}
+                            rank={data.rank}/>
+                        <DropDownList 
+                            headerText={'Openings'}
+                            data={data.opening_themes}/>
+                        <DropDownList 
+                            headerText={'Endings'}
+                            data={data.ending_themes}/>
+                        <DropDownList 
+                            headerText={'Episodes'}
+                            data={episodes.episodes}
+                            children={
+                                <EpisodesDropDownList 
+                                    episodes={episodes}
+                                    episodesPage={episodesPage}
+                                    changeEpisodesPage={() => {changeEpisodesPage(setEpisodesPage, refs.episodes.pageRef)}}/>
+                            }/>
+                    </article>
+                </section>
+            </InfoContext.Provider>
         );
     if(data === null)
         return (

@@ -1,6 +1,5 @@
 export const toggleElement = (elementRef: React.RefObject<HTMLUListElement>, imageRef: React.RefObject<HTMLHeadingElement>, episodesPageRef?: React.RefObject<HTMLSelectElement>) => {
     return () => {
-        console.log(elementRef)
         if(elementRef && elementRef.current){
             if(imageRef && imageRef.current){
                 if(elementRef.current.style.display === 'none' || !elementRef.current.style.display){

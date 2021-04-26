@@ -1,0 +1,38 @@
+@import './mixins.scss';
+
+.form{
+    @include flex-box(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    &__header{
+        @include flex-box(column, center, center);
+        width: 100%;
+    }
+    &__labels{
+        @include flex-box(column, center, flex-end);
+        width: 50%;
+    }
+    &__inputs{
+        @include flex-box(column, center, flex-start);
+        width: 50%;
+    }
+    &__label{
+        margin: 5px;
+        line-height: 23px;
+    }
+    &__input{
+        margin: 5px;
+        padding: 1px;
+        height: 23px;
+    }
+    &__submit{
+        margin: 5px auto;
+    }
+    &__link-wrapper{
+        @include flex-box(row, center, center);
+        margin-top: 10px;
+        width: 100%;
+    }
+    &__link{
+        margin-left: 5px;
+    }
+}

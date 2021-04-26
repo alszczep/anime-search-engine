@@ -3,6 +3,7 @@ import ResultCard from './home/ResultCard';
 import Loading from './shared/Loading';
 import Error from './shared/Error';
 import SearchBar from "./home/SearchBar";
+import Filters from "./home/Filters";
 import { v4 as uuidv4 } from 'uuid';
 import { fetchData } from "../modules/fetch-data";
 
@@ -16,8 +17,8 @@ const Home: FC<any> = ({ query, setQuery, defaultQuery, currentQuery, setCurrent
         getData()
     }, [url, getData]);
     if(data && data.results && data.results.length > 0)
-        return (
-            <>
+        return ( 
+            <section className='home'>
                 <SearchBar
                     setUrl={setUrl}
                     query={query} 
@@ -25,22 +26,21 @@ const Home: FC<any> = ({ query, setQuery, defaultQuery, currentQuery, setCurrent
                     currentQuery={currentQuery}
                     setCurrentQuery={setCurrentQuery}
                     setSearchData={setData}/>
-                <section className='home'>
-                    <h1
-                        className='home__query'>
-                        results for: {currentQuery}
-                    </h1>
-                    {
-                        data.results.map((item: any) => {
-                            return (
-                                <ResultCard 
-                                    data={item}
-                                    key={uuidv4()}/>
-                            )
-                        })
-                    }
-                </section>
-            </>
+                <Filters/>
+                <h1
+                    className='home__query'>
+                    results for: '{currentQuery}'
+                </h1>
+                {
+                    data.results.map((item: any) => {
+                        return (
+                            <ResultCard 
+                                data={item}
+                                key={uuidv4()}/>
+                        )
+                    })
+                }
+            </section>
         )
     if(data === undefined)
         return (
