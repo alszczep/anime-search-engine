@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FC, useState, useRef } from "react";
+import { onLogin } from "../modules/user/on-login";
 
 
-const Login: FC<any> = (): JSX.Element => {
+const Login: FC<{ setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }> = ({ setUserLoggedIn }): JSX.Element => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const onLogin = (event: any) => {
-        event.preventDefault();
-    }
+    const history = useHistory();
     return (
         <form
             className='form from--login main'
-            onSubmit={(event: any) => {onLogin(event)}}>
+            onSubmit={(event: any) => {onLogin(event, username, password, setUserLoggedIn, history)}}>
                 <h1
                     className='form__header'>
                     Log in
@@ -39,7 +38,7 @@ const Login: FC<any> = (): JSX.Element => {
                         value={username}/>
                     <input
                         className='form__input form__input--password'
-                        type='text'
+                        type='password'
                         ref={passwordRef}
                         onChange={() => {if(passwordRef && passwordRef.current) setPassword(passwordRef.current.value)}}
                         value={password}/>

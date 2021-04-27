@@ -1,13 +1,15 @@
-export const fetchData = async (url: string, method: string, data?:any): Promise<any> => {
+export const fetchData = async (url: string, method: string, data?:any, headers?: any): Promise<any> => {
     try{
+        console.log(data);
+        console.log({body: (data? JSON.stringify(data): '')})
         const response = await fetch(url, {
             method: method,
-            // mode: 'cors',
+            mode: 'cors',
             // credentials: 'include',
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // },
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             ...(data? {body: JSON.stringify(data)}: '')
         });
         console.log('response', response);

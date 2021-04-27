@@ -26,7 +26,7 @@ const App: FC = (): JSX.Element => {
           {
             userLoggedIn?
             <Redirect to="/account"/>:
-            <Login/>
+            <Login setUserLoggedIn={setUserLoggedIn}/>
           }
         </Route>
         <Route 
@@ -34,14 +34,14 @@ const App: FC = (): JSX.Element => {
           {
             userLoggedIn?
             <Redirect to="/account"/>:
-            <Register/>
+            <Register setUserLoggedIn={setUserLoggedIn}/>
           }
         </Route>
         <Route 
           path='/account'>
           {
             userLoggedIn?
-            <Account/>:
+            <Account setUserLoggedIn={setUserLoggedIn}/>:
             <Redirect to="/login"/>
           }
         </Route>
