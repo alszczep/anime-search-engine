@@ -16,18 +16,19 @@
     }
     &__header{
         width: 90%;
-        margin: 0px;
-        margin-left: 5px;
-        margin-right: 5px;
+        margin: 0px 5px;
         padding: 5px;
         border-bottom: 1px solid darken($bgColor, 7%);
     }
-    &__header--tags{
-        border-bottom: 0px;
+    &__tags-header{
+        align-self: flex-start;
     }
     &__tags{
         @include flex-box(column, flex-start, flex-start);
-        width: 100%;
+        width: 90%;
+        margin: 0px 5px;
+        padding: 5px;
+        border-bottom: 1px solid darken($bgColor, 7%);
     }
     &__tag{
         align-self: center;
@@ -35,6 +36,6 @@
     }
     &__mal-link-wrapper{
         text-align: center;
-        margin-bottom: 5px;
+        padding: 5px;
     }
 }

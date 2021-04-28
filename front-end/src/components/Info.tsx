@@ -15,7 +15,7 @@ export const InfoContext: any = createContext({});
 
 const Info: FC<any> = (): JSX.Element => {
     const { mal_id } = useParams<any>();
-    const [url] = useState<string>(`https://api.jikan.moe/v3/anime/${mal_id}`);
+    const [url] = useState<string>(`http://localhost:5000/api/anime/info/${mal_id}`);
     const [data, setData] = useState<any>();
     const [episodesPage, setEpisodesPage] = useState<number>(1);
     const [episodes, setEpisodes] = useState<any>([]);
@@ -34,15 +34,14 @@ const Info: FC<any> = (): JSX.Element => {
             pageRef: useRef<HTMLSelectElement>(null)
         },
     }
-
     const getData = useCallback(async() => {
-        setData(await fetchData(url, 'GET'));
+        setData(await fetchData(url, 'GET', undefined, (sessionStorage.getItem('jwtToken')? { jwtToken: sessionStorage.getItem('jwtToken')}: undefined)));
     }, [url]);
     useEffect(() => {
         getData();
     }, [url, getData]);
     const getEpisodes = useCallback(async() => {
-        setEpisodes(await fetchData(`https://api.jikan.moe/v3/anime/${mal_id}/episodes/${episodesPage}`, 'GET'));
+        setEpisodes(await fetchData(`http://localhost:5000/api/anime/info/${mal_id}/episodes/${episodesPage}`, 'GET'));
     }, [episodesPage, mal_id]);
     useEffect(() => {
         getEpisodes();
@@ -59,7 +58,10 @@ const Info: FC<any> = (): JSX.Element => {
                         <Description synopsis={data.synopsis}/>
                         <Ranks
                             score={data.score}
-                            rank={data.rank}/>
+                            rank={data.rank}
+                            likes={data.likes}
+                            user_like={data.user_like}
+                            mal_id={mal_id}/>
                         <DropDownList 
                             headerText={'Openings'}
                             data={data.opening_themes}/>
@@ -81,10 +83,10 @@ const Info: FC<any> = (): JSX.Element => {
         );
     if(data === null)
         return (
-            <Error elementClass={'info'}/>
+            <Error elementClass={'main'}/>
         );            
     return (
-        <Loading elementClass={'info'}/>
+        <Loading elementClass={'main'}/>
     );
 };
 

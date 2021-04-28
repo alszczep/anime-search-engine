@@ -1,13 +1,27 @@
+@import './../mixins.scss';
+
 .info__ranks{
     @include flex-box(row, center, center);
-    .info__score, .info__rank{
+    height: 95px;
+    &-box{
         @include flex-box(column, center, center);
         box-sizing: border-box;
-        width: 50%;
+        width: (100% / 3);
         height: 100%;
         margin: 0px;   
     }
     .info__score-number{
         font-size: 300%;
+    }
+    .info__score-desc{
+        height: 20px;
+    }
+    .info__like-image-wrapper{
+        @include flex-box(column, center, center);
+        height: 55px;
+    }
+    .info__like-image{
+        height: 40px;
+        width: 40px;
     }
 }

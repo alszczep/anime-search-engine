@@ -19,7 +19,7 @@ const TitleBox: FC<any> = ({ data }): JSX.Element => {
             </h4>
             <h4
                 className='info__header info__header--aired'>
-                Aired: {data.aired.string}
+                Aired: {data.aired}
             </h4>
             <h4
                 className='info__header info__header--broadcast'>
@@ -29,19 +29,20 @@ const TitleBox: FC<any> = ({ data }): JSX.Element => {
                 className='info__header info__header--duration'>
                 Duration: {data.duration}
             </h4>
-            <h4 
-                className='info__header info__header--tags'>
-                Tags:
-            </h4>
             <section
                 className='info__tags'>
+                <h4 
+                    className='info__tags-header'>
+                    Tags:
+                </h4>
                 {
-                    data.genres.map((item: any) => {
+                    data.genres.map((item: string) => {
                         return (
                             <p 
                                 className='info__tag'
                                 key={uuidv4()}>
-                                {item.name}</p>
+                                {item}
+                            </p>
                         );
                     })
                 }
@@ -50,7 +51,9 @@ const TitleBox: FC<any> = ({ data }): JSX.Element => {
                 className='info__mal-link-wrapper'>
                 <a 
                     className='info__mal-link'
-                    href={data.url}>
+                    href={data.mal_url}
+                    target='_blank'
+                    rel='noreferrer'>
                     MyAnimeList
                 </a>
             </h4>

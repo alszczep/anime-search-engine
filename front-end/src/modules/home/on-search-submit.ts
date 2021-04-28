@@ -1,12 +1,14 @@
-export const onSearchSubmit = (event: any, query: string, setUrl: React.Dispatch<React.SetStateAction<string>>, currentQuery: string, setCurrentQuery: React.Dispatch<React.SetStateAction<string>>, setSearchData: React.Dispatch<any>) => {
+import { QueryStateInterface } from './../../interfaces/QueryStateInterface';
+import { ReducerActionInterface } from "../../interfaces/ReducerActionInterface";
+
+export const onSearchSubmit = (event: any, queryState: QueryStateInterface, queryDispatch: React.Dispatch<ReducerActionInterface>, setSearchData: React.Dispatch<any>) => {
     event.preventDefault();
+    const { query, currentQuery } = queryState;
     if(query.length >= 3){
         if(query !== currentQuery){
-            setUrl(`https://api.jikan.moe/v3/search/anime?q=${query}`);
-            setCurrentQuery(query);
+            queryDispatch({ type: 'SET_CURRENT_QUERY', payload: query })
             setSearchData(undefined);
         }
-    }else{
+    }else
         alert('Query has to be at least 3 characters long');
-    }
 };
