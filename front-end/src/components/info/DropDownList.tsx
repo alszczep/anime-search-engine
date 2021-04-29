@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useContext } from "react";
 import { InfoContext } from "../Info";
 import { toggleElement } from "../../modules/info/toggle-element";
+import { DropDownListPropsInterface } from "../../interfaces/props/DropDownListPropsInterface";
 
-const DropDownList: FC<any> = ({ headerText, data, children }): JSX.Element => {
+const DropDownList: FC<DropDownListPropsInterface> = ({ headerText, data, children }): JSX.Element => {
     const { refs } = useContext(InfoContext);
     return (
         <section

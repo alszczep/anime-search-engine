@@ -1,8 +1,3 @@
-@import './../mixins.scss';
-@import './../variables.scss';
-
-$searchBarHeight: 35px;
-
 .search-bar{
     @include flex-box(row, center, center);
     width: 100%;

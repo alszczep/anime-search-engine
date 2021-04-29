@@ -1,5 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import { fetchData } from "../../modules/fetch-data";
+import { v4 as uuidv4 } from 'uuid';
 import Error from "../shared/Error";
 import Loading from "../shared/Loading";
 
@@ -13,27 +15,37 @@ const YourList: FC<any> = (): JSX.Element => {
     useEffect(() => {
         getData();
     }, [getData]);
-    if(data && data.titles){
-        if(data.titles.length > 0)
+    if(data && data.items){
+        if(data.items.length > 0)
             return (
                 <>
                     {
-                        data.titles.map((item: string) => {
-                            return <p>{item}</p>;
+                        data.items.map((item: { title: string, mal_id: number }) => {
+                            return (
+                            <Link
+                                className='account__content-list-item'
+                                key={uuidv4()}
+                                to={`/info/${item.mal_id}`}>
+                                {item.title}
+                            </Link>
+                            )
                         })
                     }
                 </>
             );
         return (
-            <>list empty</>
+            <section
+                className='account__content-list-empty'>
+                List empty
+            </section>
         );
     }
     if(data === null)
         return (
-            <Error elementClass={'main'}/>
+            <Error elementClass={''}/>
         );            
     return (
-        <Loading elementClass={'main'}/>
+        <Loading elementClass={''}/>
     );
 };
 

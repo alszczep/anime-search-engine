@@ -1,0 +1,45 @@
+.modal__overlay{
+    @include flex-box(column, center, center);
+    display: none;
+    position: fixed;
+    top: 0px;
+    z-index: 10; 
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;  
+}
+.modal{
+    @include flex-box(column, center, center);
+    position: relative;
+    z-index: 11; 
+    background-color: white;
+    border-radius: 10px;
+    min-width: 250px;
+    min-height: 80px;
+    &__close-button{
+        position: absolute;
+        top: $elementsPadding;
+        right: $elementsPadding;
+        height: $closeButtonSize;
+        width: $closeButtonSize;
+        padding: 7px;
+        border-radius: 5px;
+        background-color: darken($bgColor, 3%);
+    }
+    &__close-button:hover{
+        background-color: darken($bgColor, 5%);
+    }
+    &__header{
+        @include flex-box(row, center, center);
+        width: 100%;
+        height: $closeButtonSize;
+        margin: $elementsPadding 0px;
+        font-size: 140%;
+        letter-spacing: 1px;
+    }
+    &__content{
+        padding: $elementsPadding;
+        width: 100%;
+        margin: auto;
+    }
+}

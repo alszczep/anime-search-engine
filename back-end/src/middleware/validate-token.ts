@@ -11,7 +11,7 @@ export const validateToken = (req: express.Request, res: express.Response, next:
         const isTokenValid = jwt.verify(token, process.env.jwtSecretKey);
         if(!isTokenValid)
             return res.status(401).json({ error: 'Token is invalid' })
-        req.body.token_data = isTokenValid
+        req.body.token_data = isTokenValid;
         next();
     }catch{
         return res.status(401).json({ error: 'Token is invalid' })

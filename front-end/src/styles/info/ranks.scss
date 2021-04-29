@@ -1,5 +1,3 @@
-@import './../mixins.scss';
-
 .info__ranks{
     @include flex-box(row, center, center);
     height: 95px;

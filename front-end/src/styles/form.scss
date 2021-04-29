@@ -1,5 +1,3 @@
-@import './mixins.scss';
-
 .form{
     @include flex-box(row, flex-start, flex-start);
     flex-wrap: wrap;

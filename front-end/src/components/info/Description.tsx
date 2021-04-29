@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const Description: FC<any> = ({ synopsis }): JSX.Element => {
+const Description: FC<{synopsis: string}> = ({ synopsis }): JSX.Element => {
     return (
         <section 
             className='info__description'>

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FC } from "react";
 import { BsFillHeartFill } from 'react-icons/bs';
+import { RanksPropsInterface } from "../../interfaces/props/RanksPropsInterface";
 import { fetchData } from "../../modules/fetch-data";
 
-const Ranks: FC<any> = ({ score, rank, likes, user_like, mal_id }): JSX.Element => {
+const Ranks: FC<RanksPropsInterface> = ({ score, rank, likes, user_like, mal_id }): JSX.Element => {
     const [userLike, setUserLike] = useState(user_like);
     const [likesCount, setLikesCount] = useState(likes);
     const onLike = async() => {

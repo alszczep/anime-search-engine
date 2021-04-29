@@ -1,13 +1,10 @@
-@import './../variables.scss';
-
-.filters-wrapper{
-    background-color: $searchBarColor;
-    width: 100%;
-    padding: 0px 2px 5px 2px;
-}
 .filters{
     width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
+    height: 100%;
+    &__label{
+        padding: 3px;
+    }
+    &__checkbox{
+        margin-right: 3px;
+    }
 }

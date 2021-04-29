@@ -1,22 +1,19 @@
 import { FC } from 'react';
+import { FiltersPropsInterface } from '../../interfaces/props/FiltersPropsInterface';
 
-const Filters: FC<any> = ({ data }): JSX.Element => {
+const Filters: FC<FiltersPropsInterface> = ({ adultContent, setAdultContent, setData }): JSX.Element => {
     return (
-        <section 
-            className='filters-wrapper'>
-            <form
-                className='filters'>
-                    <section
-                        className='filters__filter-wrapper'>
-                    <input 
-                        className='filters__filter'
-                        type='checkbox'/>
-                    <label
-                        className='filters__label'>
-                        make it into modal
-                    </label>
-                </section>
-            </form>
+        <section
+            className='filters'>
+            <label
+                className='filters__label'>
+                <input
+                    className='filters__checkbox'
+                    type='checkbox'
+                    checked={adultContent}
+                    onChange={() => { setAdultContent(!adultContent); setData(undefined) }}/>
+                Adult content (R, R+, Rx)
+            </label>
         </section>
     );
 };
