@@ -1,19 +1,25 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { domain } from "../../modules/domain";
 import { fetchData } from "../../modules/fetch-data";
 import { onEmailChange } from "../../modules/user/on-email-change";
 import Error from "../shared/Error";
 import Loading from "../shared/Loading";
+import Modal from "../shared/Modal";
 
-const url = 'http://localhost:5000/api/user/user';
+const url = `${domain}/api/user/user`;
 
 const Settings: FC<any> = (): JSX.Element => {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [header, setHeader] = useState<string>('');
+    const [content, setContent] = useState<string>('');
     const [newEmail, setNewEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const newEmailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const [data, setData] = useState<any>();
     const getData = useCallback(async() => {
-        setData(await fetchData(url, 'GET', undefined, (sessionStorage.getItem('jwtToken')? { jwtToken: sessionStorage.getItem('jwtToken')}: undefined)));
+        const token = sessionStorage.getItem('jwtToken');
+        setData(await fetchData(url, 'GET', undefined, (token? { jwtToken: token}: undefined)));
     }, []) 
     useEffect(() => {
         getData()
@@ -21,13 +27,18 @@ const Settings: FC<any> = (): JSX.Element => {
     if(data && data.username && data.email)
         return (
             <>
+                <Modal
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
+                    header={header || 'Error'}
+                    content={content || 'An error occured.'}/>
                 <section
                     className='account__content-settings-header'>
                     Welcome, {data.username}. Your current email is {data.email}
                 </section>
                 <form 
                     className='settings-form settings-form--email'
-                    onSubmit={(event: any) => {onEmailChange(event, newEmail, password)}}>
+                    onSubmit={(event: any) => {onEmailChange(event, newEmail, password, setIsModalOpen, setHeader, setContent)}}>
                     <h1
                         className='settings-form__header'>
                         Change your email

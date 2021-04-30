@@ -1,8 +1,12 @@
+-- import by executing following command in psql command line
+-- \i 'path'
+-- use / insted of \ in file path
+-- or
 -- paste each command separately using psql command line
 
 CREATE DATABASE animelist;
 
-\d animelist
+\c animelist
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 

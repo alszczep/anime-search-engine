@@ -12,6 +12,9 @@ export const email = async(req: express.Request, res: express.Response) => {
             return res.status(401).json({ error: 'Invalid password' });
         if(user.rows[0].email === email)
             return res.status(401).json({ error: 'New email has to be diffrent' });
+        const isEmailTaken = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
+        if(isEmailTaken.rows.length > 0)
+            return res.status(401).json({ error: 'Email already taken' });
         await pool.query('UPDATE users SET email=$1 WHERE user_id=$2', [email, user_id]);
         return res.status(200).json({ success: true });
     }catch(error: any){

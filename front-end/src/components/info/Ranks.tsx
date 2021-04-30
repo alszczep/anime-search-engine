@@ -2,18 +2,23 @@ import { useState } from "react";
 import { FC } from "react";
 import { BsFillHeartFill } from 'react-icons/bs';
 import { RanksPropsInterface } from "../../interfaces/props/RanksPropsInterface";
+import { domain } from "../../modules/domain";
 import { fetchData } from "../../modules/fetch-data";
+import Modal from "../shared/Modal";
 
 const Ranks: FC<RanksPropsInterface> = ({ score, rank, likes, user_like, mal_id }): JSX.Element => {
     const [userLike, setUserLike] = useState(user_like);
     const [likesCount, setLikesCount] = useState(likes);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const onLike = async() => {
         if(sessionStorage.getItem('jwtToken')){
-            const likeResult = await fetchData(`http://localhost:5000/api/anime/info/like/${mal_id}`, 'GET', undefined, { jwtToken: sessionStorage.getItem('jwtToken')});
+            const likeResult = await fetchData(`${domain}/api/anime/info/like/${mal_id}`, 'GET', undefined, { jwtToken: sessionStorage.getItem('jwtToken')});
             if(likeResult && likeResult.action)
                 likeResult.action === 'liked'? 
                 like(): 
                 unlike()
+        }else{
+            setIsModalOpen(true);
         }
     }
     const like = () => {
@@ -27,6 +32,11 @@ const Ranks: FC<RanksPropsInterface> = ({ score, rank, likes, user_like, mal_id 
     return (
         <section 
             className='info__ranks'>
+            <Modal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                header={'Error'}
+                content={'You have to be logged in to like.'}/>
             <section 
                 className='info__ranks-box info__ranks-box--score'>
                 <p 

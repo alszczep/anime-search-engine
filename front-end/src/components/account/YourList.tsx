@@ -4,13 +4,15 @@ import { fetchData } from "../../modules/fetch-data";
 import { v4 as uuidv4 } from 'uuid';
 import Error from "../shared/Error";
 import Loading from "../shared/Loading";
+import { domain } from "../../modules/domain";
 
-const url = 'http://localhost:5000/api/user/list';
+const url = `${domain}/api/user/list`;
 
 const YourList: FC<any> = (): JSX.Element => {
     const [data, setData] = useState<any>(undefined);
     const getData = useCallback(async() => {
-        setData(await fetchData(url, 'GET', undefined, (sessionStorage.getItem('jwtToken')? { jwtToken: sessionStorage.getItem('jwtToken')}: undefined)));
+        const token = sessionStorage.getItem('jwtToken');
+        setData(await fetchData(url, 'GET', undefined, (token? { jwtToken: token}: undefined)));
     }, []);
     useEffect(() => {
         getData();

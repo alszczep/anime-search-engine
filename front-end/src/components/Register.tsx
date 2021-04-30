@@ -1,8 +1,11 @@
 import { Link, useHistory } from "react-router-dom";
 import { FC, useState, useRef } from "react";
 import { onRegister } from "../modules/user/on-register";
+import Modal from "./shared/Modal";
 
 const Register: FC<{ setUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }> = ({ setUserLoggedIn }): JSX.Element => {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -13,7 +16,12 @@ const Register: FC<{ setUserLoggedIn: React.Dispatch<React.SetStateAction<boolea
     return (
         <form
             className='form from--login main'
-            onSubmit={(event: any) => {onRegister(event, username, email, password, setUserLoggedIn, history)}}>
+            onSubmit={(event: any) => {onRegister(event, username, email, password, setUserLoggedIn, history, setIsModalOpen, setError)}}>
+                <Modal
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
+                    header={'Error'}
+                    content={error || 'An error occured.'}/>
                 <h1
                     className='form__header'>
                     Sign in

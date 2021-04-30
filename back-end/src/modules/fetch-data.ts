@@ -9,7 +9,7 @@ export const fetchData = async (url: string, method: string, data?:any, headers?
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                ...(headers? {body: JSON.stringify(headers)}: '')
+                ...(headers || '')
             },
             ...(data? {body: JSON.stringify(data)}: '')
         });

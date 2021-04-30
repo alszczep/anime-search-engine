@@ -9,13 +9,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { fetchData } from "../modules/fetch-data";
 import { useContext } from "react";
 import { QueryContext } from "../App";
+import { domain } from "../modules/domain";
 
-const url = 'http://localhost:5000/api/anime/search'
+const url = `${domain}/api/anime/search`;
 
 const Home: FC<any> = (): JSX.Element => {
     const { currentQuery } = useContext(QueryContext).queryState;
     const [data, setData] = useState<any>();
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [adultContent, setAdultContent] = useState<boolean>(false);
     const getData = useCallback(async() => {
         setData(await fetchData(url, 'POST', { query: currentQuery, adult_content: adultContent }));
@@ -28,9 +29,16 @@ const Home: FC<any> = (): JSX.Element => {
             <>
                 <SearchBar
                     setSearchData={setData}/>
-                <Modal
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
+                <section 
+                    className='filters-home'>
+                    <button
+                        className='filters-home__button'
+                        onClick={() => { setIsModalOpen(true) }}>
+                        Filters
+                    </button>
+                    <Modal
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
                     header={'Filters'}
                     content={
                         <Filters
@@ -38,13 +46,6 @@ const Home: FC<any> = (): JSX.Element => {
                             setAdultContent={setAdultContent}
                             setData={setData}/>
                     }/>
-                <section 
-                    className='filters-home'>
-                    <button
-                        className='filters-home__button'
-                        onClick={() => { setIsOpen(true) }}>
-                        Filters
-                    </button>
                 </section>
                 <section className='home'>
                     <h1

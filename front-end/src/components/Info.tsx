@@ -10,12 +10,13 @@ import Ranks from "./info/Ranks";
 import { fetchData } from "../modules/fetch-data";
 import { changeEpisodesPage } from "../modules/info/change-episodes-page";
 import { createContext } from "react";
+import { domain } from "../modules/domain";
 
 export const InfoContext: any = createContext({});
 
 const Info: FC<any> = (): JSX.Element => {
     const { mal_id } = useParams<any>();
-    const [url] = useState<string>(`http://localhost:5000/api/anime/info/${mal_id}`);
+    const [url] = useState<string>(`${domain}/api/anime/info/${mal_id}`);
     const [data, setData] = useState<any>();
     const [episodesPage, setEpisodesPage] = useState<number>(1);
     const [episodes, setEpisodes] = useState<any>([]);
@@ -35,13 +36,14 @@ const Info: FC<any> = (): JSX.Element => {
         },
     }
     const getData = useCallback(async() => {
-        setData(await fetchData(url, 'GET', undefined, (sessionStorage.getItem('jwtToken')? { jwtToken: sessionStorage.getItem('jwtToken')}: undefined)));
+        const token = sessionStorage.getItem('jwtToken');
+        setData(await fetchData(url, 'GET', undefined, (token? { jwtToken: token}: undefined)));
     }, [url]);
     useEffect(() => {
         getData();
     }, [url, getData]);
     const getEpisodes = useCallback(async() => {
-        setEpisodes(await fetchData(`http://localhost:5000/api/anime/info/${mal_id}/episodes/${episodesPage}`, 'GET'));
+        setEpisodes(await fetchData(`${domain}/api/anime/info/${mal_id}/episodes/${episodesPage}`, 'GET'));
     }, [episodesPage, mal_id]);
     useEffect(() => {
         getEpisodes();

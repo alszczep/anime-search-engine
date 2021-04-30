@@ -7,9 +7,7 @@ const Error: FC<{elementClass: string, error?: string, children?: any}> = ({ ele
             <h1
                 className='error__header'>
                 {
-                    error?
-                    error:
-                    'An error occured, please try reloading the website and check your internet connection. If problem still occurs contact an administrator.'
+                    error || 'An error occured, please try reloading the website and check your internet connection. If problem still occurs contact an administrator.'
                 }        
             </h1>
         </section>

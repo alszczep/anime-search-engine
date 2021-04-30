@@ -1,7 +1,5 @@
 export const fetchData = async (url: string, method: string, data?:any, headers?: any): Promise<any> => {
     try{
-        console.log(data);
-        console.log({body: (data? JSON.stringify(data): '')})
         const response = await fetch(url, {
             method: method,
             mode: 'cors',
@@ -9,16 +7,13 @@ export const fetchData = async (url: string, method: string, data?:any, headers?
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                ...(headers? headers: '')
+                ...(headers || '')
             },
             ...(data? {body: JSON.stringify(data)}: '')
         });
-        console.log('response', response);
         const result = await response.json();
-        console.log('response.json()', result);
         return result;
     }catch(error){
-        console.log('fetch error', error);
         return null;
     }
 };
