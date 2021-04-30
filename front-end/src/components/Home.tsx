@@ -9,9 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { fetchData } from "../modules/fetch-data";
 import { useContext } from "react";
 import { QueryContext } from "../App";
-import { domain } from "../modules/domain";
 
-const url = `${domain}/api/anime/search`;
+const url = '/api/anime/search';
 
 const Home: FC<any> = (): JSX.Element => {
     const { currentQuery } = useContext(QueryContext).queryState;

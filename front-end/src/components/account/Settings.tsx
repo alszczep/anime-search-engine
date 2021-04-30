@@ -1,12 +1,11 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { domain } from "../../modules/domain";
 import { fetchData } from "../../modules/fetch-data";
 import { onEmailChange } from "../../modules/user/on-email-change";
 import Error from "../shared/Error";
 import Loading from "../shared/Loading";
 import Modal from "../shared/Modal";
 
-const url = `${domain}/api/user/user`;
+const url = '/api/user/user';
 
 const Settings: FC<any> = (): JSX.Element => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

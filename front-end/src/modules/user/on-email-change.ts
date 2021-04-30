@@ -1,11 +1,10 @@
-import { domain } from '../domain';
 import { fetchData } from './../fetch-data';
 
 export const onEmailChange = async(event: any, email: string, password: string, setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>, setHeader: React.Dispatch<React.SetStateAction<string>>, setContent: React.Dispatch<React.SetStateAction<string>>) => {
     event.preventDefault();
     if(email.length > 0 && password.length > 0){
         const token = sessionStorage.getItem('jwtToken');
-        const resp = await fetchData(`${domain}/api/user/email`, 'POST', { email, password }, (token? { jwtToken: token}: undefined));
+        const resp = await fetchData('/api/user/email', 'POST', { email, password }, (token? { jwtToken: token}: undefined));
         if(resp && !resp.error){
             setHeader('Info');
             setContent('Email changed')

@@ -10,13 +10,12 @@ import Ranks from "./info/Ranks";
 import { fetchData } from "../modules/fetch-data";
 import { changeEpisodesPage } from "../modules/info/change-episodes-page";
 import { createContext } from "react";
-import { domain } from "../modules/domain";
 
 export const InfoContext: any = createContext({});
 
 const Info: FC<any> = (): JSX.Element => {
     const { mal_id } = useParams<any>();
-    const [url] = useState<string>(`${domain}/api/anime/info/${mal_id}`);
+    const [url] = useState<string>(`/api/anime/info/${mal_id}`);
     const [data, setData] = useState<any>();
     const [episodesPage, setEpisodesPage] = useState<number>(1);
     const [episodes, setEpisodes] = useState<any>([]);
@@ -43,7 +42,7 @@ const Info: FC<any> = (): JSX.Element => {
         getData();
     }, [url, getData]);
     const getEpisodes = useCallback(async() => {
-        setEpisodes(await fetchData(`${domain}/api/anime/info/${mal_id}/episodes/${episodesPage}`, 'GET'));
+        setEpisodes(await fetchData(`/api/anime/info/${mal_id}/episodes/${episodesPage}`, 'GET'));
     }, [episodesPage, mal_id]);
     useEffect(() => {
         getEpisodes();

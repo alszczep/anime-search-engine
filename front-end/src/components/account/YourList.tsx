@@ -4,9 +4,8 @@ import { fetchData } from "../../modules/fetch-data";
 import { v4 as uuidv4 } from 'uuid';
 import Error from "../shared/Error";
 import Loading from "../shared/Loading";
-import { domain } from "../../modules/domain";
 
-const url = `${domain}/api/user/list`;
+const url = '/api/user/list';
 
 const YourList: FC<any> = (): JSX.Element => {
     const [data, setData] = useState<any>(undefined);

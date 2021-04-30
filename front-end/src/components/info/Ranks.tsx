@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FC } from "react";
 import { BsFillHeartFill } from 'react-icons/bs';
 import { RanksPropsInterface } from "../../interfaces/props/RanksPropsInterface";
-import { domain } from "../../modules/domain";
 import { fetchData } from "../../modules/fetch-data";
 import Modal from "../shared/Modal";
 
@@ -12,7 +11,7 @@ const Ranks: FC<RanksPropsInterface> = ({ score, rank, likes, user_like, mal_id 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const onLike = async() => {
         if(sessionStorage.getItem('jwtToken')){
-            const likeResult = await fetchData(`${domain}/api/anime/info/like/${mal_id}`, 'GET', undefined, { jwtToken: sessionStorage.getItem('jwtToken')});
+            const likeResult = await fetchData(`/api/anime/info/like/${mal_id}`, 'GET', undefined, { jwtToken: sessionStorage.getItem('jwtToken')});
             if(likeResult && likeResult.action)
                 likeResult.action === 'liked'? 
                 like(): 
