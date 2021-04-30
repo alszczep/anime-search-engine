@@ -4,7 +4,6 @@ export const onRegister = async(event: any, username: string, email: string, pas
     event.preventDefault();
     if(username.length > 0 && email.length > 0 && password.length > 0){
         const resp = await fetchData('/api/user/register', 'POST', { username, email, password });
-        console.log(resp)
         if(resp && !resp.error){
             sessionStorage.setItem('jwtToken', resp.jwtToken);
             setUserLoggedIn(true);
