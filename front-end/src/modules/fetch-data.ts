@@ -12,8 +12,10 @@ export const fetchData = async (url: string, method: string, data?:any, headers?
             ...(data? {body: JSON.stringify(data)}: '')
         });
         const result = await response.json();
+        console.log('result', result);
         return result;
     }catch(error){
+        console.log('error', error)
         return null;
     }
 };
