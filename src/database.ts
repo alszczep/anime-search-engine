@@ -10,4 +10,4 @@ const devConfig = {
     database: process.env.pgDatabase
 }
 
-export const pool = new pg.Pool(process.env.NODE_ENV === 'production'? { connectionString: process.env.DATABASE_URL }: devConfig)
+export const pool = new pg.Pool(process.env.NODE_ENV === 'production'? { connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }: devConfig)
