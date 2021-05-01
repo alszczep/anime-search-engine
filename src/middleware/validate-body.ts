@@ -1,15 +1,13 @@
+import { isPasswordValid } from './../modules/is-password-valid';
+import { isEmailValid } from './../modules/is-email-vaild';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
 const loginLength = 4;
 const passwordLength = 8;
 
-const isEmailValid = (email: string) => {
-    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-}
-const isPasswordValid = (password: string): boolean => {
-    return (/[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password));
-} 
+
+
 
 export const validateBody = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     // USER

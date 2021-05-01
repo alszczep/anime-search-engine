@@ -8,10 +8,16 @@
     &__labels{
         @include flex-box(column, center, flex-end);
         width: 50%;
+        @media screen and (max-width: 410px){
+            width: 40%;
+        }
     }
     &__inputs{
         @include flex-box(column, center, flex-start);
         width: 50%;
+        @media screen and (max-width: 410px){
+            width: 60%;
+        }
     }
     &__label{
         margin: 5px;
@@ -21,14 +27,28 @@
         margin: 5px;
         padding: 1px;
         height: 23px;
+        @media screen and (max-width: 410px){
+            width: 100%;
+        }
     }
     &__submit{
-        margin: 5px auto;
+        margin: 8px auto;
+        border-radius: 5px;
+        padding: 3px 15px;
+        border-width: 0px;
+        background-color: lighten($bgColor, (7% / 2));
+    }
+    &__submit:hover{
+        background-color: lighten($bgColor, (5% / 2));
     }
     &__link-wrapper{
         @include flex-box(row, center, center);
-        margin-top: 10px;
+        margin-top: 6px;
         width: 100%;
+        @media screen and (max-width: 300px){
+            flex-wrap: wrap;
+            text-align: center;
+        }
     }
     &__link{
         margin-left: 5px;
