@@ -23,62 +23,63 @@ const Home: FC<any> = (): JSX.Element => {
     useEffect(() => {
         getData()
     }, [getData]);
-    if((data && data.length > 0) || data === undefined)
-        return ( 
-            <>
-                <SearchBar
-                    setSearchData={setData}/>
-                <section 
-                    className='filters-home'>
-                    <button
-                        className='filters-home__button'
-                        onClick={() => { setIsModalOpen(true) }}>
-                        Filters
-                    </button>
-                    <Modal
-                    isOpen={isModalOpen}
-                    setIsOpen={setIsModalOpen}
-                    header={'Filters'}
-                    content={
-                        <Filters
-                            adultContent={adultContent}
-                            setAdultContent={setAdultContent}
-                            setData={setData}/>
-                    }/>
-                </section>
-                <section className='home'>
-                    <h1
-                        className='home__query'>
-                        results for: '{currentQuery}'
-                    </h1>
-                    {   
-                        data?
-                        (
-                            data.map((item: any) => {
-                                return (
-                                    <ResultCard 
-                                        data={item}
-                                        key={uuidv4()}/>
-                                )
-                            })
-                        ):(
-                            <Loading 
-                                elementClass={''}/>
-                        )
+    return ( 
+        <>
+            <SearchBar
+                setSearchData={setData}/>
+            <section 
+                className='filters-home'>
+                <button
+                    className='filters-home__button'
+                    onClick={() => { setIsModalOpen(true) }}>
+                    Filters
+                </button>
+                <Modal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                header={'Filters'}
+                content={
+                    <Filters
+                        adultContent={adultContent}
+                        setAdultContent={setAdultContent}
+                        setData={setData}/>
+                }/>
+            </section>
+            <section className='home'>
+                <h1
+                    className='home__query'>
+                    results for: '{currentQuery}'
+                </h1>
+                {   
+                    (data && data.length > 0)?
+                    (
+                        data.map((item: any) => {
+                            return (
+                                <ResultCard 
+                                    data={item}
+                                    key={uuidv4()}/>
+                            )
+                        })
+                    ):
+                    (data === null)?
+                    (
+                        <Error 
+                            elementClass={''}/>
+                    ):
+                    (data === undefined)?
+                    (
+                        <Loading 
+                            elementClass={''}/>
+                    ):
+                    (
+                        <Error 
+                            elementClass={''}
+                            error={'There is no data matching the query.'}/>
+                    )
 
-                    }
-                </section>
-            </>
-        )
-    if(data === null)
-        return (
-            <Error 
-                elementClass={''}/>
-        )
-    return (
-        <Error 
-            elementClass={''}
-            error={'There is no data matching the query.'}/>
+                }
+            </section>
+        </>
     )
 };
 

@@ -1,7 +1,7 @@
 import { QueryStateInterface } from './../../interfaces/QueryStateInterface';
 import { ReducerActionInterface } from "../../interfaces/ReducerActionInterface";
 
-export const onSearchSubmit = (event: any, queryState: QueryStateInterface, queryDispatch: React.Dispatch<ReducerActionInterface>, setSearchData: React.Dispatch<any>) => {
+export const onSearchSubmit = (event: any, queryState: QueryStateInterface, queryDispatch: React.Dispatch<ReducerActionInterface>, setSearchData: React.Dispatch<any>, setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
     event.preventDefault();
     const { query, currentQuery } = queryState;
     if(query.length >= 3){
@@ -10,5 +10,5 @@ export const onSearchSubmit = (event: any, queryState: QueryStateInterface, quer
             setSearchData(undefined);
         }
     }else
-        alert('Query has to be at least 3 characters long');
+        setIsModalOpen(true);
 };
