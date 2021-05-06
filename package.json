@@ -8,13 +8,15 @@
     "npm": "6.14.8"
   },
   "scripts": {
-    "dev": "nodemon src/app.ts",
+    "devServer": "nodemon src/app.ts",
+    "devClient": "cd front-end && npm start",
+    "installAll": "npm install && cd front-end && npm install",
     "start": "node dist/app.js",
     "build": "tsc -p .",
     "heroku-prebuild": "cd front-end && npm install && npm run build",
     "heroku-postbuild": "npm run build",
     "test": "jest --verbose",
-    "test-full": "echo BACK-END && npm test && echo FRONT-END && cd front-end && npm test"
+    "testAll": "echo BACK-END && npm test && echo FRONT-END && cd front-end && npm test"
   },
   "author": "",
   "license": "ISC",

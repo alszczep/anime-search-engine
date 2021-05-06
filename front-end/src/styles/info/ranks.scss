@@ -1,15 +1,13 @@
 .info__ranks{
     @include flex-box(row, center, center);
-    height: 95px;
+    height: 105px;
     &-box{
         @include flex-box(column, center, center);
-        box-sizing: border-box;
         width: (100% / 3);
         height: 100%;
-        margin: 0px;   
     }
     .info__score-number{
-        font-size: 300%;
+        font-size: 220%;
     }
     .info__score-desc{
         height: 20px;

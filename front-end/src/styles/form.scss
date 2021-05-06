@@ -4,6 +4,8 @@
     &__header{
         @include flex-box(column, center, center);
         width: 100%;
+        font-size: 200%;
+        margin-bottom: 5px;
     }
     &__labels{
         @include flex-box(column, center, flex-end);
@@ -32,6 +34,7 @@
         }
     }
     &__submit{
+        font-size: 110%;
         margin: 8px auto;
         border-radius: 5px;
         padding: 3px 15px;
